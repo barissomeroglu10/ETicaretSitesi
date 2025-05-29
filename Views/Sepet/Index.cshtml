@@ -1,0 +1,114 @@
+@model IEnumerable<ETicaretSitesi.Models.SepetUrun>
+
+@{
+    ViewData["Title"] = "Sepetim";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Sepetim</h2>
+
+    @if (TempData["Hata"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Hata"]
+        </div>
+    }
+
+    @if (TempData["Mesaj"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mesaj"]
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ürün</th>
+                        <th>Fiyat</th>
+                        <th>Adet</th>
+                        <th>Toplam</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @if (!string.IsNullOrEmpty(item.Urun?.ResimUrl))
+                                    {
+                                        <img src="@item.Urun.ResimUrl" alt="@item.Urun?.Ad" class="img-thumbnail me-2" style="max-height: 50px;" />
+                                    }
+                                    <div>
+                                        <div>@(item.Urun?.Ad ?? "-")</div>
+                                        <small class="text-muted">@((item.Urun != null) ? item.Urun.UrunTipi.ToString() : "-")</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@(item.Urun?.Fiyat != null ? item.Urun.Fiyat.ToString("C") : "-")</td>
+                            <td>
+                                <form asp-action="UrunGuncelle" method="post" class="d-flex align-items-center">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <input type="number" name="adet" value="@item.Adet" min="1" max="@(item.Urun?.StokMiktari ?? 1)" class="form-control form-control-sm" style="width: 70px;" />
+                                    <button type="submit" class="btn btn-sm btn-outline-primary ms-2">Güncelle</button>
+                                </form>
+                            </td>
+                            <td>@(((item.Urun?.Fiyat ?? 0) * item.Adet).ToString("C"))</td>
+                            <td>
+                                <form asp-action="UrunSil" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Toplam:</strong></td>
+                        <td><strong>@(Model.Sum(x => (x.Urun?.Fiyat ?? 0) * x.Adet).ToString("C"))</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Alışverişe Devam Et</a>
+            <form asp-action="SiparisOnayla" method="post">
+                <button type="submit" class="btn btn-success">Siparişi Onayla</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <h4 class="text-muted">Sepetiniz boş</h4>
+            <p class="mb-4">Sepetinizde henüz ürün bulunmuyor.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Alışverişe Başla</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('table');
+            if (table) {
+                table.style.opacity = '0';
+                table.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    table.style.transition = 'all 0.5s ease';
+                    table.style.opacity = '1';
+                    table.style.transform = 'translateY(0)';
+                }, 100);
+            }
+        });
+    </script>
+} 

@@ -1,0 +1,30 @@
+@if (Context.Session.GetString("KullaniciId") != null)
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Hesap" asp-action="Profil">
+                <i class="fas fa-user me-1"></i>Profilim
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Hesap" asp-action="Cikis">
+                <i class="fas fa-sign-out-alt me-1"></i>Çıkış Yap
+            </a>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Hesap" asp-action="Giris">
+                <i class="fas fa-sign-in-alt me-1"></i>Giriş Yap
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Hesap" asp-action="Kayit">
+                <i class="fas fa-user-plus me-1"></i>Kayıt Ol
+            </a>
+        </li>
+    </ul>
+} 

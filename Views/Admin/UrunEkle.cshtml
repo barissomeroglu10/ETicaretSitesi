@@ -1,0 +1,94 @@
+@model ETicaretSitesi.Models.Urun
+@{
+    ViewData["Title"] = "Yeni Ürün";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Yeni Ürün</h1>
+        <a asp-action="Urunler" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Ürün Bilgileri</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UrunEkle" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Ad" class="form-label"></label>
+                                    <input asp-for="Ad" class="form-control" />
+                                    <span asp-validation-for="Ad" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="UrunTipi" class="form-label"></label>
+                                    <select asp-for="UrunTipi" class="form-select" asp-items="Html.GetEnumSelectList<ETicaretSitesi.Models.UrunTipi>()">
+                                        <option value="">Seçiniz</option>
+                                    </select>
+                                    <span asp-validation-for="UrunTipi" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Fiyat" class="form-label"></label>
+                                    <input asp-for="Fiyat" class="form-control" type="number" step="0.01" />
+                                    <span asp-validation-for="Fiyat" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="StokMiktari" class="form-label"></label>
+                                    <input asp-for="StokMiktari" class="form-control" type="number" />
+                                    <span asp-validation-for="StokMiktari" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Aciklama" class="form-label"></label>
+                            <textarea asp-for="Aciklama" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Aciklama" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="GorselUrl" class="form-label">Ürün Görseli</label>
+                            <input type="file" name="gorsel" class="form-control" accept="image/*" />
+                            <span asp-validation-for="GorselUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="AktifMi" class="form-check-input" />
+                                <label asp-for="AktifMi" class="form-check-label"></label>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

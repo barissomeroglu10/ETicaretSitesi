@@ -1,0 +1,385 @@
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="login-container">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Sol taraf - Görsel -->
+            <div class="col-lg-6 d-none d-lg-block login-image-section">
+                <div class="login-image-content">
+                    <div class="overlay">
+                        <div class="content">
+                            <h1 class="display-4 text-white mb-4">VANtastic Team'e Hoş Geldiniz</h1>
+                            <p class="lead text-white mb-4">En kaliteli teknoloji ürünleri, en uygun fiyatlarla!</p>
+                            <div class="features">
+                                <div class="feature-item">
+                                    <i class="fas fa-shipping-fast me-3"></i>
+                                    <span>Ücretsiz Kargo</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shield-alt me-3"></i>
+                                    <span>Güvenli Alışveriş</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-headset me-3"></i>
+                                    <span>7/24 Müşteri Desteği</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sağ taraf - Form -->
+            <div class="col-lg-6 login-form-section">
+                <div class="login-form-container">
+                    <div class="text-center mb-5">
+                        <div class="logo mb-4">
+                            <i class="fas fa-store fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="login-title">Hesabınıza Giriş Yapın</h2>
+                        <p class="login-subtitle text-muted">Alışverişe devam etmek için giriş yapın</p>
+                    </div>
+
+                    <form asp-action="Giris" method="post" class="login-form">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="E-posta adresiniz" required>
+                            <label for="email">
+                                <i class="fas fa-envelope me-2"></i>E-posta Adresi
+                            </label>
+                        </div>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control form-control-lg" id="sifre" name="sifre" placeholder="Şifreniz" required>
+                            <label for="sifre">
+                                <i class="fas fa-lock me-2"></i>Şifre
+                            </label>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="beniHatirla">
+                                    <label class="form-check-label" for="beniHatirla">
+                                        Beni Hatırla
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a href="#" class="text-decoration-none">Şifremi Unuttum?</a>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg login-btn">
+                                <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
+                            </button>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <a asp-action="AdminGiris" class="btn btn-warning btn-lg">
+                                <i class="fas fa-crown me-2"></i>Admin Girişi
+                            </a>
+                        </div>
+
+
+                    </form>
+                    
+                    <div class="text-center">
+                        <p class="register-link">
+                            Hesabınız yok mu? 
+                            <a asp-action="Kayit" class="text-decoration-none fw-bold">Hemen Kayıt Olun</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .login-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 50px;
+        }
+
+        .login-image-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+        }
+
+        .login-image-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover;
+            opacity: 0.3;
+        }
+
+        .overlay {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .features {
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .login-form-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem;
+        }
+
+        .login-form-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-floating > .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .form-floating > label {
+            padding: 1rem 1rem 1rem 3rem;
+            color: #6c757d;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f5f8b);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .social-btn {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #f8f9fa;
+            border-color: #dee2e6;
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .register-link {
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+
+        .register-link a {
+            color: #3498db;
+        }
+
+        .register-link a:hover {
+            color: #2980b9;
+        }
+
+        .form-check-input:checked {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .alert-danger {
+            border-radius: 12px;
+            border: none;
+            background: #fee;
+            color: #c33;
+        }
+
+        /* Responsive */
+        @@media (max-width: 991.98px) {
+            .login-form-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .login-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @@media (max-width: 575.98px) {
+            .login-form-container {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .form-floating > .form-control {
+                padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+            }
+
+            .form-floating > label {
+                padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+            }
+        }
+
+        /* Animasyonlar */
+        .login-form-container {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @@keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-item {
+            animation: fadeInLeft 0.6s ease-out;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.2s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @@keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Form animasyonları
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-control');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+
+            // Form submit animasyonu
+            const form = document.querySelector('.login-form');
+            const submitBtn = document.querySelector('.login-btn');
+            
+            form.addEventListener('submit', function() {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Giriş yapılıyor...';
+                submitBtn.disabled = true;
+            });
+        });
+    </script>
+} 

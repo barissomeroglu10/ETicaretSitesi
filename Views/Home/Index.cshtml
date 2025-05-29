@@ -1,0 +1,451 @@
+@model IEnumerable<ETicaretSitesi.Models.Urun>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<!-- Hero Section -->
+<div class="text-center mb-5">
+    <h1 class="display-4 mb-3">Hoş Geldiniz</h1>
+    <p class="lead">En kaliteli ürünler, en uygun fiyatlarla burada!</p>
+</div>
+
+<!-- Kategoriler Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Kategoriler</h2>
+        <div class="text-center mb-4">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary me-2">Tüm Ürünler</a>
+            <a href="@Url.Action("Index", "Home", new { kategori = "Laptop" })" class="btn btn-outline-secondary me-2">Laptoplar</a>
+            <a href="@Url.Action("Index", "Home", new { kategori = "Telefon" })" class="btn btn-outline-secondary">Telefonlar</a>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Laptoplar" class="w-100">
+            <div class="category-overlay">
+                <div class="category-content">
+                    <h3 class="category-title">Laptoplar</h3>
+                    <p class="category-description">En son teknoloji laptoplar</p>
+                    <a href="@Url.Action("Index", "Home", new { kategori = "Laptop" })" class="btn btn-light btn-lg">Keşfet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Telefonlar" class="w-100">
+            <div class="category-overlay">
+                <div class="category-content">
+                    <h3 class="category-title">Telefonlar</h3>
+                    <p class="category-description">Akıllı telefonlar ve aksesuarlar</p>
+                    <a href="@Url.Action("Index", "Home", new { kategori = "Telefon" })" class="btn btn-light btn-lg">Keşfet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Kişiselleştirilmiş Öneriler (Giriş yapmış kullanıcılar için) -->
+@if (ViewBag.PersonalizedRecommendations != null && ((List<ETicaretSitesi.Models.Urun>)ViewBag.PersonalizedRecommendations).Any())
+{
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-robot text-primary me-2"></i>
+                    Size Özel AI Önerileri
+                </h2>
+                <span class="badge bg-gradient-primary text-white px-3 py-2">
+                    <i class="fas fa-sparkles me-1"></i>Yapay Zeka Destekli
+                </span>
+            </div>
+            <p class="text-muted mb-4">Alışveriş geçmişinize göre size özel seçilmiş ürünler</p>
+        </div>
+        
+        <div class="col-12">
+            <div class="row">
+                @foreach (var recommendation in (List<ETicaretSitesi.Models.Urun>)ViewBag.PersonalizedRecommendations)
+                {
+                    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                        <div class="recommendation-card">
+                            <div class="recommendation-badge">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="recommendation-image">
+                                @if (!string.IsNullOrEmpty(recommendation.ResimUrl))
+                                {
+                                    <img src="@recommendation.ResimUrl" alt="@recommendation.Ad">
+                                }
+                                else
+                                {
+                                    <img src="~/images/no-image.png" alt="Ürün Görseli Yok">
+                                }
+                            </div>
+                            <div class="recommendation-info">
+                                <h6 class="recommendation-title">@recommendation.Ad</h6>
+                                <div class="recommendation-price">@recommendation.Fiyat.ToString("C")</div>
+                                <div class="recommendation-actions">
+                                    <a href="@Url.Action("UrunDetay", "Home", new { id = recommendation.Id })" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <form asp-controller="Sepet" asp-action="UrunEkle" method="post" style="display: inline;">
+                                        <input type="hidden" name="urunId" value="@recommendation.Id" />
+                                        <input type="hidden" name="adet" value="1" />
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Öne Çıkan Ürünler -->
+<div class="row mb-5 pb-5" style="margin-bottom: 5rem !important; padding-bottom: 5rem !important;">
+    <div class="col-12">
+        @if (!string.IsNullOrEmpty((string?)ViewBag.SecilenKategori))
+        {
+            <h2 class="text-center mb-4">@ViewBag.SecilenKategori Ürünleri</h2>
+        }
+        else
+        {
+            <h2 class="text-center mb-4">Öne Çıkan Ürünler</h2>
+        }
+    </div>
+    @foreach (var urun in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-5 pb-5">
+            <div class="product-card">
+                <div class="product-image">
+                    @if (!string.IsNullOrEmpty(urun.ResimUrl))
+                    {
+                        <img src="@urun.ResimUrl" alt="@urun.Ad">
+                    }
+                    else
+                    {
+                        <img src="~/images/no-image.png" alt="Ürün Görseli Yok">
+                    }
+                </div>
+                <div class="product-info">
+                    <h3>@urun.Ad</h3>
+                    <p class="product-description">@urun.Aciklama</p>
+                    <div class="product-price">@urun.Fiyat.ToString("C")</div>
+                    <div class="product-stock">
+                        <i class="fas fa-box me-1"></i>Stok: @urun.StokMiktari
+                    </div>
+                    <div class="product-actions" style="margin-top: auto !important; min-height: 140px !important; padding-bottom: 2rem !important;">
+                        <div class="d-grid gap-2 w-100" style="width: 100% !important;">
+                            <a href="@Url.Action("UrunDetay", "Home", new { id = urun.Id })" class="btn btn-outline-primary">
+                                <i class="fas fa-info-circle me-2"></i>Detaylar
+                            </a>
+                            <form asp-controller="Sepet" asp-action="UrunEkle" method="post" style="display: inline;">
+                                <input type="hidden" name="urunId" value="@urun.Id" />
+                                <input type="hidden" name="adet" value="1" />
+                                <button type="submit" class="btn add-to-cart-btn">
+                                    <i class="fas fa-cart-plus me-2"></i>Sepete Ekle
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        /* Category Cards */
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 350px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .category-card img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .category-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: visible !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 700px !important;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #f8f9fa;
+            flex-shrink: 0;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            display: flex !important;
+            flex-direction: column !important;
+            flex-grow: 1 !important;
+            min-height: 350px !important;
+        }
+        
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            height: 45px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 0.8rem;
+        }
+        
+        .product-stock {
+            font-size: 0.9rem;
+            color: #27ae60;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .product-actions {
+            margin-top: auto !important;
+            padding-top: 1rem !important;
+            padding-bottom: 2rem !important;
+            position: relative !important;
+            z-index: 10 !important;
+            min-height: 140px !important;
+            display: flex !important;
+            align-items: flex-end !important;
+            width: 100% !important;
+        }
+        
+        .add-to-cart-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            padding: 0.8rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f5f8b);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Animations */
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .category-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Recommendation Cards */
+        .recommendation-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+            border-color: #3498db;
+        }
+
+        .recommendation-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            z-index: 10;
+        }
+
+        .recommendation-image {
+            height: 150px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-card:hover .recommendation-image img {
+            transform: scale(1.05);
+        }
+
+        .recommendation-info {
+            padding: 1rem;
+        }
+
+        .recommendation-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+            height: 2.4rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .recommendation-price {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 0.8rem;
+        }
+
+        .recommendation-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .recommendation-actions .btn {
+            flex: 1;
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(45deg, #3498db, #2980b9) !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyonlar
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.product-card, .category-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+} 

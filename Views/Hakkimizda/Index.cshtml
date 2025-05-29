@@ -1,0 +1,146 @@
+@{
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<div class="hakkimizda-container">
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h2 class="card-title text-center mb-5 text-primary">Hakkımızda</h2>
+                        
+                        <div class="mb-4">
+                            <h4 class="text-secondary"><i class="fas fa-users me-2"></i>Biz Kimiz?</h4>
+                            <p class="text-muted">
+                                VANtastic Team olarak, müşterilerimize en kaliteli teknoloji ürünlerini en uygun fiyatlarla sunmayı hedefliyoruz. 
+                                2024 yılında kurulan şirketimiz, laptop ve telefon konusunda uzmanlaşmış bir e-ticaret platformudur.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="text-secondary"><i class="fas fa-bullseye me-2"></i>Misyonumuz</h4>
+                            <p class="text-muted">
+                                Müşterilerimize güvenilir, hızlı ve kaliteli bir alışveriş deneyimi sunmak. 
+                                En son teknoloji ürünlerini uygun fiyatlarla müşterilerimize ulaştırmak ve teknolojiye erişimi demokratikleştirmek.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="text-secondary"><i class="fas fa-eye me-2"></i>Vizyonumuz</h4>
+                            <p class="text-muted">
+                                Türkiye'nin lider teknoloji e-ticaret platformlarından biri olmak ve müşteri memnuniyetinde örnek gösterilen bir marka haline gelmek.
+                                Teknoloji dünyasında güvenilir bir isim olmak.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="text-secondary"><i class="fas fa-heart me-2"></i>Değerlerimiz</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Müşteri Memnuniyeti</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Kalite</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Güvenilirlik</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Yenilikçilik</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Şeffaflık</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Müşteri Odaklılık</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="text-secondary"><i class="fas fa-phone me-2"></i>İletişim</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                        <strong>Adres:</strong><br>
+                                        Örnek Mahallesi, Teknoloji Sokak No:1<br>
+                                        Şişli/İstanbul
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-phone text-primary me-2"></i>
+                                        <strong>Telefon:</strong> (0212) 123 45 67
+                                    </p>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-envelope text-primary me-2"></i>
+                                        <strong>E-posta:</strong> info@vantastic.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg px-5">
+                                <i class="fas fa-home me-2"></i>Ana Sayfaya Dön
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .hakkimizda-container {
+            min-height: calc(100vh - 200px);
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .text-muted {
+            line-height: 1.6;
+        }
+
+        .btn-lg {
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-lg:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,123,255,0.3);
+        }
+
+        @@media (max-width: 768px) {
+            .card-body {
+                padding: 2rem !important;
+            }
+            
+            .card-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+} 

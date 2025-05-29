@@ -1,0 +1,120 @@
+@model IEnumerable<ETicaretSitesi.Models.Siparis>
+
+@{
+    ViewData["Title"] = "Siparişler";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Siparişler</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tüm Siparişler</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sipariş No</th>
+                            <th>Müşteri</th>
+                            <th>Tutar</th>
+                            <th>Durum</th>
+                            <th>Ödeme Durumu</th>
+                            <th>Tarih</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var siparis in Model)
+                        {
+                            <tr>
+                                <td>@siparis.SiparisNumarasi</td>
+                                <td>@siparis.Kullanici?.Ad @siparis.Kullanici?.Soyad</td>
+                                <td>@siparis.ToplamTutar.ToString("C")</td>
+                                <td>
+                                    <span class="badge bg-@(siparis.SiparisDurumu switch {
+                                        ETicaretSitesi.Models.SiparisDurumu.Beklemede => "warning",
+                                        ETicaretSitesi.Models.SiparisDurumu.Onaylandi => "info",
+                                        ETicaretSitesi.Models.SiparisDurumu.Kargoda => "primary",
+                                        ETicaretSitesi.Models.SiparisDurumu.Tamamlandi => "success",
+                                        ETicaretSitesi.Models.SiparisDurumu.IptalEdildi => "danger",
+                                        _ => "secondary"
+                                    })">
+                                        @siparis.SiparisDurumu
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(siparis.OdemeDurumu switch {
+                                        ETicaretSitesi.Models.OdemeDurumu.Beklemede => "warning",
+                                        ETicaretSitesi.Models.OdemeDurumu.Odendi => "success",
+                                        ETicaretSitesi.Models.OdemeDurumu.IptalEdildi => "danger",
+                                        ETicaretSitesi.Models.OdemeDurumu.IadeEdildi => "secondary",
+                                        _ => "secondary"
+                                    })">
+                                        @siparis.OdemeDurumu
+                                    </span>
+                                </td>
+                                <td>@siparis.SiparisTarihi.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="SiparisDetay" asp-route-id="@siparis.Id" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#durumModal@(siparis.Id)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal fade" id="durumModal@(siparis.Id)" tabindex="-1" aria-labelledby="durumModalLabel@(siparis.Id)" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="durumModalLabel@(siparis.Id)">Sipariş Durumu Güncelle</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form asp-action="SiparisDurumuGuncelle" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="id" value="@siparis.Id" />
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Sipariş Durumu</label>
+                                                            <select name="yeniDurum" class="form-select">
+                                                                <option value="Beklemede" selected="@(siparis.SiparisDurumu == ETicaretSitesi.Models.SiparisDurumu.Beklemede ? "selected" : null)">Beklemede</option>
+                                                                <option value="Onaylandi" selected="@(siparis.SiparisDurumu == ETicaretSitesi.Models.SiparisDurumu.Onaylandi ? "selected" : null)">Onaylandı</option>
+                                                                <option value="Kargoda" selected="@(siparis.SiparisDurumu == ETicaretSitesi.Models.SiparisDurumu.Kargoda ? "selected" : null)">Kargoda</option>
+                                                                <option value="Tamamlandi" selected="@(siparis.SiparisDurumu == ETicaretSitesi.Models.SiparisDurumu.Tamamlandi ? "selected" : null)">Tamamlandı</option>
+                                                                <option value="IptalEdildi" selected="@(siparis.SiparisDurumu == ETicaretSitesi.Models.SiparisDurumu.IptalEdildi ? "selected" : null)">İptal</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                                                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#siparislerTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json'
+                },
+                order: [[2, 'desc']]
+            });
+        });
+    </script>
+} 

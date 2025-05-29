@@ -1,0 +1,452 @@
+@model ETicaretSitesi.Models.Kullanici
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="register-container">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Sol taraf - Görsel -->
+            <div class="col-lg-6 d-none d-lg-block register-image-section">
+                <div class="register-image-content">
+                    <div class="overlay">
+                        <div class="content">
+                            <h1 class="display-4 text-white mb-4">VANtastic Team Ailesine Katılın</h1>
+                            <p class="lead text-white mb-4">Binlerce ürün arasından seçim yapın ve özel fırsatlardan yararlanın!</p>
+                            <div class="benefits">
+                                <div class="benefit-item">
+                                    <i class="fas fa-gift me-3"></i>
+                                    <span>Özel İndirimler</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-star me-3"></i>
+                                    <span>Sadakat Puanları</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-bell me-3"></i>
+                                    <span>Erken Erişim</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sağ taraf - Form -->
+            <div class="col-lg-6 register-form-section">
+                <div class="register-form-container">
+                    <div class="text-center mb-4">
+                        <div class="logo mb-3">
+                            <i class="fas fa-store fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="register-title">Hesap Oluşturun</h2>
+                        <p class="register-subtitle text-muted">Hemen üye olun ve alışverişe başlayın</p>
+                    </div>
+
+                    <form asp-action="Kayit" method="post" class="register-form">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Ad" class="form-control" placeholder="Adınız" required />
+                                    <label asp-for="Ad">
+                                        <i class="fas fa-user me-2"></i>Ad
+                                    </label>
+                                    <span asp-validation-for="Ad" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Soyad" class="form-control" placeholder="Soyadınız" required />
+                                    <label asp-for="Soyad">
+                                        <i class="fas fa-user me-2"></i>Soyad
+                                    </label>
+                                    <span asp-validation-for="Soyad" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" type="email" placeholder="E-posta adresiniz" required />
+                            <label asp-for="Email">
+                                <i class="fas fa-envelope me-2"></i>E-posta Adresi
+                            </label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Telefon" class="form-control" type="tel" placeholder="Telefon numaranız" />
+                            <label asp-for="Telefon">
+                                <i class="fas fa-phone me-2"></i>Telefon (Opsiyonel)
+                            </label>
+                            <span asp-validation-for="Telefon" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Adres" class="form-control" placeholder="Adresiniz" />
+                            <label asp-for="Adres">
+                                <i class="fas fa-map-marker-alt me-2"></i>Adres (Opsiyonel)
+                            </label>
+                            <span asp-validation-for="Adres" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-4">
+                            <input asp-for="Sifre" class="form-control" type="password" placeholder="Şifreniz" required />
+                            <label asp-for="Sifre">
+                                <i class="fas fa-lock me-2"></i>Şifre
+                            </label>
+                            <span asp-validation-for="Sifre" class="text-danger"></span>
+                            <div class="password-strength mt-2">
+                                <small class="text-muted">Şifreniz en az 6 karakter olmalıdır</small>
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="sozlesme" required>
+                            <label class="form-check-label" for="sozlesme">
+                                <a href="#" class="text-decoration-none">Kullanım Şartları</a> ve 
+                                <a href="#" class="text-decoration-none">Gizlilik Politikası</a>'nı okudum ve kabul ediyorum
+                            </label>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="kampanya">
+                            <label class="form-check-label" for="kampanya">
+                                Kampanya ve fırsatlardan haberdar olmak istiyorum
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg register-btn">
+                                <i class="fas fa-user-plus me-2"></i>Hesap Oluştur
+                            </button>
+                        </div>
+
+
+                    </form>
+                    
+                    <div class="text-center">
+                        <p class="login-link">
+                            Zaten hesabınız var mı? 
+                            <a asp-action="Giris" class="text-decoration-none fw-bold">Giriş Yapın</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .register-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 50px;
+        }
+
+        .register-image-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+        }
+
+        .register-image-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover;
+            opacity: 0.3;
+        }
+
+        .overlay {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .benefits {
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .register-form-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem;
+        }
+
+        .register-form-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .register-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-floating > .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .form-floating > label {
+            padding: 1rem 1rem 1rem 3rem;
+            color: #6c757d;
+        }
+
+        .register-btn {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(45deg, #229954, #1e8449);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .social-btn {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #f8f9fa;
+            border-color: #dee2e6;
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .login-link {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: #3498db;
+        }
+
+        .login-link a:hover {
+            color: #2980b9;
+        }
+
+        .form-check-input:checked {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .alert-danger {
+            border-radius: 12px;
+            border: none;
+            background: #fee;
+            color: #c33;
+        }
+
+        .password-strength {
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @@media (max-width: 991.98px) {
+            .register-form-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .register-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @@media (max-width: 575.98px) {
+            .register-form-container {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .register-title {
+                font-size: 1.5rem;
+            }
+
+            .form-floating > .form-control {
+                padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+            }
+
+            .form-floating > label {
+                padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+            }
+        }
+
+        /* Animasyonlar */
+        .register-form-container {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @@keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .benefit-item {
+            animation: fadeInLeft 0.6s ease-out;
+        }
+
+        .benefit-item:nth-child(1) { animation-delay: 0.2s; }
+        .benefit-item:nth-child(2) { animation-delay: 0.4s; }
+        .benefit-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @@keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Form animasyonları
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-control');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+
+            // Şifre gücü kontrolü
+            const passwordInput = document.querySelector('input[name="Sifre"]');
+            const strengthDiv = document.querySelector('.password-strength small');
+            
+            if (passwordInput && strengthDiv) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    let strength = 'Zayıf';
+                    let color = '#dc3545';
+                    
+                    if (password.length >= 6) {
+                        strength = 'Orta';
+                        color = '#ffc107';
+                    }
+                    if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {
+                        strength = 'Güçlü';
+                        color = '#28a745';
+                    }
+                    
+                    strengthDiv.textContent = `Şifre gücü: ${strength}`;
+                    strengthDiv.style.color = color;
+                });
+            }
+
+            // Form submit animasyonu
+            const form = document.querySelector('.register-form');
+            const submitBtn = document.querySelector('.register-btn');
+            
+            form.addEventListener('submit', function() {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Hesap oluşturuluyor...';
+                submitBtn.disabled = true;
+            });
+        });
+    </script>
+} 

@@ -1,0 +1,26 @@
+@if (Context.Request.Cookies["cookieconsent"] == null)
+{
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <i class="fas fa-cookie-bite me-2"></i>
+                    Bu web sitesi, size en iyi deneyimi sunmak için çerezleri kullanmaktadır. 
+                    <a asp-controller="Home" asp-action="Privacy" class="alert-link">Daha fazla bilgi için tıklayın</a>.
+                </div>
+                <div class="col-md-4 text-end">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="alert" aria-label="Close" onclick="acceptCookies()">
+                        <i class="fas fa-check me-1"></i>Kabul Et
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            document.cookie = "cookieconsent=1; path=/; max-age=31536000";
+            document.getElementById("cookieConsent").style.display = "none";
+        }
+    </script>
+} 

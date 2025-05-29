@@ -1,0 +1,179 @@
+@model ETicaretSitesi.Models.Siparis
+
+@{
+    ViewData["Title"] = "Sipariş Detayı";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Sipariş Detayı</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p><strong>Sipariş Numarası:</strong> @Model.SiparisNumarasi</p>
+                            <p><strong>Sipariş Tarihi:</strong> @Model.SiparisTarihi.ToString("dd.MM.yyyy HH:mm")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Sipariş Durumu:</strong>
+                                <span class="badge bg-@(Model.SiparisDurumu switch {
+                                    SiparisDurumu.Beklemede => "warning",
+                                    SiparisDurumu.Onaylandi => "info",
+                                    SiparisDurumu.Kargoda => "primary",
+                                    SiparisDurumu.Tamamlandi => "success",
+                                    SiparisDurumu.IptalEdildi => "danger",
+                                    _ => "secondary"
+                                })">
+                                    @Model.SiparisDurumu
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Ödeme Durumu:</strong>
+                                <span class="badge bg-@(Model.OdemeDurumu switch {
+                                    OdemeDurumu.Beklemede => "warning",
+                                    OdemeDurumu.Odendi => "success",
+                                    OdemeDurumu.IptalEdildi => "danger",
+                                    _ => "secondary"
+                                })">
+                                    @Model.OdemeDurumu
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <h5 class="mb-3">Ürünler</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Birim Fiyat</th>
+                                    <th>Adet</th>
+                                    <th>Toplam</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var siparisUrunu in Model.SiparisUrunleri)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                @if (!string.IsNullOrEmpty(siparisUrunu.Urun?.ResimUrl))
+                                                {
+                                                    <img src="@siparisUrunu.Urun?.ResimUrl" alt="@siparisUrunu.Urun?.Ad" class="img-thumbnail me-2" style="max-height: 50px;" />
+                                                }
+                                                <div>
+                                                    <div>@siparisUrunu.Urun?.Ad</div>
+                                                    <small class="text-muted">@siparisUrunu.Urun?.UrunTipi</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@siparisUrunu.BirimFiyat.ToString("C")</td>
+                                        <td>@siparisUrunu.Adet</td>
+                                        <td>@((siparisUrunu.BirimFiyat * siparisUrunu.Adet).ToString("C"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Toplam Tutar:</strong></td>
+                                    <td><strong>@Model.ToplamTutar.ToString("C")</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5>Teslimat Bilgileri</h5>
+                        <hr />
+                        <p><strong>Adres:</strong> @Model.Adres</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Sipariş Özeti</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Sipariş Numarası:</strong> @Model.SiparisNumarasi</p>
+                    <p><strong>Sipariş Tarihi:</strong> @Model.SiparisTarihi.ToString("dd.MM.yyyy HH:mm")</p>
+                    <p>
+                        <strong>Sipariş Durumu:</strong>
+                        <span class="badge bg-@(Model.SiparisDurumu switch {
+                            SiparisDurumu.Beklemede => "warning",
+                            SiparisDurumu.Onaylandi => "info",
+                            SiparisDurumu.Kargoda => "primary",
+                            SiparisDurumu.Tamamlandi => "success",
+                            SiparisDurumu.IptalEdildi => "danger",
+                            _ => "secondary"
+                        })">
+                            @Model.SiparisDurumu
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Ödeme Durumu:</strong>
+                        <span class="badge bg-@(Model.OdemeDurumu switch {
+                            OdemeDurumu.Beklemede => "warning",
+                            OdemeDurumu.Odendi => "success",
+                            OdemeDurumu.IptalEdildi => "danger",
+                            _ => "secondary"
+                        })">
+                            @Model.OdemeDurumu
+                        </span>
+                    </p>
+                    <hr />
+                    <p><strong>Toplam Tutar:</strong> @Model.ToplamTutar.ToString("C")</p>
+                    
+                    @if (Model.OdemeDurumu == OdemeDurumu.Beklemede)
+                    {
+                        <hr />
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Odeme", "Siparis", new { id = Model.Id })" class="btn btn-success btn-lg">
+                                <i class="fas fa-credit-card me-2"></i>Ödeme Yap
+                            </a>
+                            <form asp-controller="Siparis" asp-action="Iptal" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Siparişi iptal etmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-times me-2"></i>Siparişi İptal Et
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else if (Model.OdemeDurumu == OdemeDurumu.Odendi)
+                    {
+                        <hr />
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>Ödeme tamamlandı
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+} 

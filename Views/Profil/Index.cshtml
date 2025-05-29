@@ -1,0 +1,68 @@
+@model ETicaretSitesi.Models.Kullanici
+
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user me-2"></i>Profil Bilgilerim</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Guncelle" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Ad" class="form-label">Ad</label>
+                                    <input asp-for="Ad" class="form-control" />
+                                    <span asp-validation-for="Ad" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Soyad" class="form-label">Soyad</label>
+                                    <input asp-for="Soyad" class="form-control" />
+                                    <span asp-validation-for="Soyad" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label">E-posta</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                            <small class="form-text text-muted">E-posta adresi değiştirilemez.</small>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Telefon" class="form-label">Telefon</label>
+                            <input asp-for="Telefon" class="form-control" />
+                            <span asp-validation-for="Telefon" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Adres" class="form-label">Adres</label>
+                            <textarea asp-for="Adres" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Adres" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Güncelle
+                            </button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

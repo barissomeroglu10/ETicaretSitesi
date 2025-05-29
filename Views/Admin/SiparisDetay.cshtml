@@ -1,0 +1,158 @@
+@model ETicaretSitesi.Models.Siparis
+
+@{
+    ViewData["Title"] = "Sipariş Detayı";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Sipariş Detayı</h1>
+        <a asp-action="Siparisler" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Sipariş Bilgileri</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Sipariş No</dt>
+                                <dd class="col-sm-8">@Model.SiparisNumarasi</dd>
+
+                                <dt class="col-sm-4">Sipariş Tarihi</dt>
+                                <dd class="col-sm-8">@Model.SiparisTarihi.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4">Sipariş Durumu</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-@(Model.SiparisDurumu switch {
+                                        SiparisDurumu.Beklemede => "warning",
+                                        SiparisDurumu.Onaylandi => "info",
+                                        SiparisDurumu.Kargoda => "primary",
+                                        SiparisDurumu.Tamamlandi => "success",
+                                        SiparisDurumu.IptalEdildi => "danger",
+                                        _ => "secondary"
+                                    })">
+                                        @Model.SiparisDurumu
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4">Ödeme Durumu</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-@(Model.OdemeDurumu switch {
+                                        OdemeDurumu.Beklemede => "warning",
+                                        OdemeDurumu.Odendi => "success",
+                                        OdemeDurumu.IptalEdildi => "danger",
+                                        _ => "secondary"
+                                    })">
+                                        @Model.OdemeDurumu
+                                    </span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Müşteri</dt>
+                                <dd class="col-sm-8">@Model.Kullanici?.Ad @Model.Kullanici?.Soyad</dd>
+
+                                <dt class="col-sm-4">E-posta</dt>
+                                <dd class="col-sm-8">@Model.Kullanici?.Email</dd>
+
+                                <dt class="col-sm-4">Telefon</dt>
+                                <dd class="col-sm-8">@Model.Kullanici?.Telefon</dd>
+
+                                <dt class="col-sm-4">Adres</dt>
+                                <dd class="col-sm-8">@Model.Kullanici?.Adres</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Sipariş Ürünleri</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Birim Fiyat</th>
+                                    <th>Adet</th>
+                                    <th>Toplam</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var siparisUrun in Model.SiparisUrunleri)
+                                {
+                                    <tr>
+                                        <td>@siparisUrun.Urun?.Ad</td>
+                                        <td>@siparisUrun.BirimFiyat.ToString("C")</td>
+                                        <td>@siparisUrun.Adet</td>
+                                        <td>@((siparisUrun.BirimFiyat * siparisUrun.Adet).ToString("C"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-end">Toplam Tutar:</th>
+                                    <th>@Model.ToplamTutar.ToString("C")</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Sipariş Durumu Güncelle</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SiparisDurumuGuncelle" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label class="form-label">Sipariş Durumu</label>
+                            <select name="siparisDurumu" class="form-select">
+                                <option value="@SiparisDurumu.Beklemede" selected="@(Model.SiparisDurumu == SiparisDurumu.Beklemede)">Beklemede</option>
+                                <option value="@SiparisDurumu.Onaylandi" selected="@(Model.SiparisDurumu == SiparisDurumu.Onaylandi)">Onaylandı</option>
+                                <option value="@SiparisDurumu.Kargoda" selected="@(Model.SiparisDurumu == SiparisDurumu.Kargoda)">Kargoda</option>
+                                <option value="@SiparisDurumu.Tamamlandi" selected="@(Model.SiparisDurumu == SiparisDurumu.Tamamlandi)">Tamamlandı</option>
+                                <option value="@SiparisDurumu.IptalEdildi" selected="@(Model.SiparisDurumu == SiparisDurumu.IptalEdildi)">İptal Edildi</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+} 

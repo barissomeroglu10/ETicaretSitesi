@@ -1,0 +1,61 @@
+@model Urun
+@{
+    ViewData["Title"] = "Ürün Sil";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Ürün Sil</h1>
+        <a asp-action="Urunler" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <h4 class="alert-heading">Dikkat!</h4>
+                <p>Bu ürünü silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Ürün Adı</dt>
+                        <dd class="col-sm-8">@Model.Ad</dd>
+
+                        <dt class="col-sm-4">Fiyat</dt>
+                        <dd class="col-sm-8">@Model.Fiyat.ToString("C")</dd>
+
+                        <dt class="col-sm-4">Stok Miktarı</dt>
+                        <dd class="col-sm-8">@Model.StokMiktari</dd>
+
+                        <dt class="col-sm-4">Durum</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.AktifMi ? "success" : "danger")">
+                                @(Model.AktifMi ? "Aktif" : "Pasif")
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-6">
+                    @if (!string.IsNullOrEmpty(Model.GorselUrl))
+                    {
+                        <div class="text-center">
+                            <img src="@Model.GorselUrl" alt="@Model.Ad" class="img-thumbnail" style="max-width: 200px;" />
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <form asp-action="UrunSil" method="post" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Sil
+                </button>
+            </form>
+        </div>
+    </div>
+</div> 

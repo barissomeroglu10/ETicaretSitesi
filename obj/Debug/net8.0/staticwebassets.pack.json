@@ -1,0 +1,121 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop1.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop2.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop3.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop4.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop5.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop6.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop7.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop7_20250528160451.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop7_20250528160451.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\laptop8.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\no-image.png",
+      "PackagePath": "staticwebassets\\images\\no-image.png"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon1.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon2.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon3.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon4.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon5.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon6.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon6_20250529135152.jpg",
+      "PackagePath": "staticwebassets\\images\\telefon6_20250529135152.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\lib\\bootstrap\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\lib\\bootstrap\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\lib\\jquery\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\jquery.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ETicaretSitesi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ETicaretSitesi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ETicaretSitesi.props",
+      "PackagePath": "build\\ETicaretSitesi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ETicaretSitesi.props",
+      "PackagePath": "buildMultiTargeting\\ETicaretSitesi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ETicaretSitesi.props",
+      "PackagePath": "buildTransitive\\ETicaretSitesi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

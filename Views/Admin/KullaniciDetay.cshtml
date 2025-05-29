@@ -1,0 +1,135 @@
+@model ETicaretSitesi.Models.Kullanici
+@{
+    ViewData["Title"] = "Kullanıcı Detayı";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Kullanıcı Detayı</h1>
+        <a asp-action="Kullanicilar" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Kullanıcı Bilgileri</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Ad</dt>
+                                <dd class="col-sm-8">@Model.Ad</dd>
+
+                                <dt class="col-sm-4">Soyad</dt>
+                                <dd class="col-sm-8">@Model.Soyad</dd>
+
+                                <dt class="col-sm-4">E-posta</dt>
+                                <dd class="col-sm-8">@Model.Email</dd>
+
+                                <dt class="col-sm-4">Telefon</dt>
+                                <dd class="col-sm-8">@Model.Telefon</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Adres</dt>
+                                <dd class="col-sm-8">@Model.Adres</dd>
+
+                                <dt class="col-sm-4">Rol</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-@(Model.AdminMi ? "danger" : "info")">
+                                        @(Model.AdminMi ? "Admin" : "Kullanıcı")
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4">Durum</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-@(Model.AktifMi ? "success" : "danger")">
+                                        @(Model.AktifMi ? "Aktif" : "Pasif")
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4">Kayıt Tarihi</dt>
+                                <dd class="col-sm-8">@Model.KayitTarihi.ToString("dd/MM/yyyy HH:mm")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Siparişler</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Sipariş No</th>
+                                    <th>Tarih</th>
+                                    <th>Tutar</th>
+                                    <th>Durum</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var siparis in Model.Siparisler)
+                                {
+                                    <tr>
+                                        <td>@siparis.SiparisNumarasi</td>
+                                        <td>@siparis.SiparisTarihi.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@siparis.ToplamTutar.ToString("C")</td>
+                                        <td>
+                                            <span class="badge bg-@(siparis.SiparisDurumu switch {
+                                                SiparisDurumu.Beklemede => "warning",
+                                                SiparisDurumu.Onaylandi => "info",
+                                                SiparisDurumu.Kargoda => "primary",
+                                                SiparisDurumu.Tamamlandi => "success",
+                                                SiparisDurumu.IptalEdildi => "danger",
+                                                _ => "secondary"
+                                            })">
+                                                @siparis.SiparisDurumu
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a asp-action="SiparisDetay" asp-route-id="@siparis.Id" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Kullanıcı Durumu</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="KullaniciDurumuGuncelle" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label class="form-label">Durum</label>
+                            <select name="aktifMi" class="form-select">
+                                <option value="true" selected="@(Model.AktifMi ? "selected" : null)">Aktif</option>
+                                <option value="false" selected="@(!Model.AktifMi ? "selected" : null)">Pasif</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

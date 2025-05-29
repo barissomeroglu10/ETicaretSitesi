@@ -1,0 +1,80 @@
+[
+  {
+    "ContainingType": "ETicaretSitesi.Controllers.RecommendationController",
+    "Method": "GetRecommendationsForProduct",
+    "RelativePath": "api/Recommendation/for-product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ETicaretSitesi.Controllers.RecommendationController",
+    "Method": "GetRecommendationsForUser",
+    "RelativePath": "api/Recommendation/for-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ETicaretSitesi.Controllers.RecommendationController",
+    "Method": "GetMyRecommendations",
+    "RelativePath": "api/Recommendation/my-recommendations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ETicaretSitesi.Controllers.RecommendationController",
+    "Method": "GetModelStatus",
+    "RelativePath": "api/Recommendation/status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ETicaretSitesi.Controllers.RecommendationController",
+    "Method": "TrainModel",
+    "RelativePath": "api/Recommendation/train",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,111 @@
+@model IEnumerable<ETicaretSitesi.Models.Siparis>
+
+@{
+    ViewData["Title"] = "Siparişlerim";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0">Siparişlerim</h3>
+        </div>
+        <div class="card-body">
+            @if (TempData["Hata"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Hata"]
+                </div>
+            }
+
+            @if (TempData["Mesaj"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Mesaj"]
+                </div>
+            }
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    Henüz siparişiniz bulunmamaktadır.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sipariş No</th>
+                                <th>Tarih</th>
+                                <th>Tutar</th>
+                                <th>Durum</th>
+                                <th>Ödeme</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var siparis in Model)
+                            {
+                                <tr>
+                                    <td>@siparis.SiparisNumarasi</td>
+                                    <td>@siparis.SiparisTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@siparis.ToplamTutar.ToString("C")</td>
+                                    <td>
+                                        <span class="badge bg-@(siparis.SiparisDurumu switch {
+                                            SiparisDurumu.Beklemede => "warning",
+                                            SiparisDurumu.Onaylandi => "info",
+                                            SiparisDurumu.Kargoda => "primary",
+                                            SiparisDurumu.Tamamlandi => "success",
+                                            SiparisDurumu.IptalEdildi => "danger",
+                                            _ => "secondary"
+                                        })">
+                                            @siparis.SiparisDurumu
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@(siparis.OdemeDurumu switch {
+                                            OdemeDurumu.Beklemede => "warning",
+                                            OdemeDurumu.Odendi => "success",
+                                            OdemeDurumu.IptalEdildi => "danger",
+                                            _ => "secondary"
+                                        })">
+                                            @siparis.OdemeDurumu
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Detay" asp-route-id="@siparis.Id" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        @if (siparis.OdemeDurumu == OdemeDurumu.Beklemede)
+                                        {
+                                            <a asp-action="Odeme" asp-route-id="@siparis.Id" class="btn btn-success btn-sm">
+                                                <i class="fas fa-credit-card"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table');
+            table.style.opacity = '0';
+            table.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                table.style.transition = 'all 0.5s ease';
+                table.style.opacity = '1';
+                table.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+} 

@@ -1,0 +1,114 @@
+@model ETicaretSitesi.Models.Siparis
+
+@{
+    ViewData["Title"] = "Ödeme";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Ödeme</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Bu bir ödeme simülasyonudur. Gerçek bir ödeme işlemi yapılmayacaktır.
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Sipariş Bilgileri</h5>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Sipariş Numarası:</strong> @Model.SiparisNumarasi</p>
+                                <p><strong>Sipariş Tarihi:</strong> @Model.SiparisTarihi.ToString("dd.MM.yyyy HH:mm")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Toplam Tutar:</strong> @Model.ToplamTutar.ToString("C")</p>
+                                <p><strong>Teslimat Adresi:</strong> @Model.Adres</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Ödeme Bilgileri</h5>
+                        <hr />
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> Bu bir demo uygulamasıdır. Gerçek kart bilgileri istenmeyecektir.
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Kart Numarası (Demo)</label>
+                                    <input type="text" class="form-control" value="**** **** **** 1234" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Son Kullanma</label>
+                                    <input type="text" class="form-control" value="12/25" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">CVV</label>
+                                    <input type="text" class="form-control" value="***" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Kart Sahibi</label>
+                                    <input type="text" class="form-control" value="Demo Kullanıcı" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <h6><i class="fas fa-shield-alt me-2"></i>Güvenlik</h6>
+                            <small>Bu demo uygulamasında ödeme simülasyonu yapılmaktadır. Herhangi bir gerçek ödeme işlemi gerçekleşmez.</small>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <form asp-action="OdemeIptal" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-outline-danger btn-lg" onclick="return confirm('Siparişi iptal etmek istediğinize emin misiniz?')">
+                                <i class="fas fa-times me-2"></i> Siparişi İptal Et
+                            </button>
+                        </form>
+
+                        <form asp-action="OdemeOnayla" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-success btn-lg px-5" style="font-weight: 600;">
+                                <i class="fas fa-credit-card me-2"></i> @Model.ToplamTutar.ToString("C") Öde
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Sayfa yüklendiğinde animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+} 

@@ -1,0 +1,112 @@
+@model ETicaretSitesi.Models.Kullanici
+
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Kullanıcı Düzenle</h1>
+        <a asp-action="Kullanicilar" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Kullanıcı Bilgileri</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="KullaniciDuzenle" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="KayitTarihi" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Ad" class="form-label"></label>
+                                    <input asp-for="Ad" class="form-control" />
+                                    <span asp-validation-for="Ad" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Soyad" class="form-label"></label>
+                                    <input asp-for="Soyad" class="form-control" />
+                                    <span asp-validation-for="Soyad" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Telefon" class="form-label"></label>
+                                    <input asp-for="Telefon" class="form-control" />
+                                    <span asp-validation-for="Telefon" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Adres" class="form-label"></label>
+                            <textarea asp-for="Adres" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Adres" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="AdminMi" class="form-label"></label>
+                                    <select asp-for="AdminMi" class="form-select">
+                                        <option value="false">Kullanıcı</option>
+                                        <option value="true">Admin</option>
+                                    </select>
+                                    <span asp-validation-for="AdminMi" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="AktifMi" class="form-label"></label>
+                                    <select asp-for="AktifMi" class="form-select">
+                                        <option value="true">Aktif</option>
+                                        <option value="false">Pasif</option>
+                                    </select>
+                                    <span asp-validation-for="AktifMi" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Sifre" class="form-label"></label>
+                            <input asp-for="Sifre" class="form-control" type="password" />
+                            <span asp-validation-for="Sifre" class="text-danger"></span>
+                            <small class="form-text text-muted">Şifreyi değiştirmek istemiyorsanız boş bırakın.</small>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 
