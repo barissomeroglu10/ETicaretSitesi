@@ -1,0 +1,221 @@
+@model ETicaretSitesi.Models.SepetOneriViewModel
+
+@{
+    ViewData["Title"] = "Yapay Zeka Önerileri";
+}
+
+<div class="container mt-5">
+    <!-- Başarı Mesajı -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <div class="alert alert-success text-center border-0 shadow-sm">
+                <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                <h4 class="alert-heading mb-2">🎉 Ürün Başarıyla Sepete Eklendi!</h4>
+                <p class="mb-2">
+                    <strong>@Model.EklenenUrun.Ad</strong> sepetinize eklendi.
+                </p>
+                <small class="text-muted">
+                    <i class="fas fa-shopping-cart"></i> 
+                    Sepetinizde şu anda <strong>@Model.SepetUrunSayisi</strong> ürün bulunuyor.
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Yapay Zeka Önerileri -->
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-gradient text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h4 class="mb-0">
+                        <i class="fas fa-brain me-2"></i>
+                        🤖 Yapay Zeka Önerileri
+                    </h4>
+                    <p class="mb-0 mt-2">Size özel seçtiğimiz ürünler</p>
+                </div>
+                
+                <div class="card-body p-4">
+                    @if (Model.OnerilenUrunler.Any())
+                    {
+                        <p class="text-center text-muted mb-4">
+                            <i class="fas fa-lightbulb text-warning me-1"></i>
+                            Bu ürünleri de beğenebilirsiniz! Algoritmamız sizin için özel olarak seçti.
+                        </p>
+                        
+                        <div class="row">
+                            @foreach (var urun in Model.OnerilenUrunler)
+                            {
+                                <div class="col-md-6 col-lg-3 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm product-card">
+                                        <div class="position-relative">
+                                            @if (!string.IsNullOrEmpty(urun.ResimUrl))
+                                            {
+                                                <img src="@urun.ResimUrl" class="card-img-top" alt="@urun.Ad" style="height: 200px; object-fit: cover;">
+                                            }
+                                            else
+                                            {
+                                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                                </div>
+                                            }
+                                            
+                                            <!-- Öneri Badge -->
+                                            <span class="position-absolute top-0 start-0 badge bg-primary rounded-pill m-2">
+                                                <i class="fas fa-star me-1"></i>Önerilen
+                                            </span>
+                                            
+                                            <!-- Kategori Badge -->
+                                            <span class="position-absolute top-0 end-0 badge bg-secondary rounded-pill m-2">
+                                                @urun.UrunTipi.ToString()
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="card-body d-flex flex-column">
+                                            <h6 class="card-title fw-bold">@urun.Ad</h6>
+                                            <p class="card-text text-muted small flex-grow-1">
+                                                @(urun.Aciklama.Length > 60 ? urun.Aciklama.Substring(0, 60) + "..." : urun.Aciklama)
+                                            </p>
+                                            
+                                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                                <span class="h5 text-primary mb-0 fw-bold">@urun.Fiyat.ToString("C")</span>
+                                                @if (urun.StokMiktari > 0)
+                                                {
+                                                    <small class="text-success">
+                                                        <i class="fas fa-check-circle me-1"></i>Stokta
+                                                    </small>
+                                                }
+                                                else
+                                                {
+                                                    <small class="text-danger">
+                                                        <i class="fas fa-times-circle me-1"></i>Tükendi
+                                                    </small>
+                                                }
+                                            </div>
+                                            
+                                            <div class="mt-3">
+                                                @if (urun.StokMiktari > 0)
+                                                {
+                                                    <form asp-action="UrunEkle" method="post" class="d-inline">
+                                                        <input type="hidden" name="urunId" value="@urun.Id" />
+                                                        <input type="hidden" name="adet" value="1" />
+                                                        <button type="submit" class="btn btn-primary btn-sm w-100">
+                                                            <i class="fas fa-plus me-1"></i>Sepete Ekle
+                                                        </button>
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-secondary btn-sm w-100" disabled>
+                                                        <i class="fas fa-ban me-1"></i>Stokta Yok
+                                                    </button>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Şu anda öneri bulunmuyor</h5>
+                            <p class="text-muted">Daha fazla ürün keşfetmek için ana sayfaya göz atabilirsiniz.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aksiyon Butonları -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="d-flex gap-3 justify-content-center">
+                <a asp-action="Index" class="btn btn-success btn-lg">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Sepete Git (@Model.SepetUrunSayisi)
+                </a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-store me-2"></i>
+                    Alışverişe Devam
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        
+        .alert-success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: none;
+        }
+        
+        .badge {
+            font-size: 0.75rem;
+        }
+        
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ürün kartlarına hover efekti
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            });
+            
+            // Sepete ekle butonuna tık efekti
+            const addToCartButtons = document.querySelectorAll('button[type="submit"]');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Ekleniyor...';
+                    this.disabled = true;
+                });
+            });
+        });
+    </script>
+} 
