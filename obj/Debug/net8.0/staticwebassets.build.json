@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZxFe1pcQG0w0N1WaMwemVnVyO6NuxSGAZfhoGOenEZI=",
+  "Hash": "TuAqR0j/z0vX0C7ZoLu9VHj49RKTso5KV9snjzRJDmw=",
   "Source": "ETicaretSitesi",
   "BasePath": "_content/ETicaretSitesi",
   "Mode": "Default",
@@ -1674,6 +1674,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\telefon6_20250529135152.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7.jpg",
+      "SourceId": "ETicaretSitesi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\",
+      "BasePath": "_content/ETicaretSitesi",
+      "RelativePath": "images/telefon7#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8f4nyh5xlq",
+      "Integrity": "3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\telefon7.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7_20250602032600.jpg",
+      "SourceId": "ETicaretSitesi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\",
+      "BasePath": "_content/ETicaretSitesi",
+      "RelativePath": "images/telefon7_20250602032600#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8f4nyh5xlq",
+      "Integrity": "3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\telefon7_20250602032600.jpg"
     },
     {
       "Identity": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\js\\admin.js",
@@ -5557,6 +5599,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-QDKZjNeBUHFgrkmsMLa6gJgFr/spH7QkhQkUwrfgmm0="
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7.8f4nyh5xlq.jpg",
+      "AssetFile": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:25:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8f4nyh5xlq"
+        },
+        {
+          "Name": "label",
+          "Value": "images/telefon7.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7.jpg",
+      "AssetFile": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:25:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7_20250602032600.8f4nyh5xlq.jpg",
+      "AssetFile": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7_20250602032600.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:26:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8f4nyh5xlq"
+        },
+        {
+          "Name": "label",
+          "Value": "images/telefon7_20250602032600.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7_20250602032600.jpg",
+      "AssetFile": "C:\\Users\\baris\\OneDrive\\Desktop\\CursorCodes\\ETicaretSitesi\\wwwroot\\images\\telefon7_20250602032600.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:26:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
         }
       ]
     },

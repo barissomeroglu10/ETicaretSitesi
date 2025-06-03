@@ -284,4 +284,5 @@ C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\bin\Debug\net8.0\runt
 C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\obj\Debug\net8.0\ETicaretSitesi.sourcelink.json
 C:\Users\baris\OneDrive\Desktop\CursorCodes\ETicaretSitesi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

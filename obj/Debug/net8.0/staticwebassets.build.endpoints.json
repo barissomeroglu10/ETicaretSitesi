@@ -3781,6 +3781,170 @@
       ]
     },
     {
+      "Route": "images/telefon7.8f4nyh5xlq.jpg",
+      "AssetFile": "images/telefon7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:25:46 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8f4nyh5xlq"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        },
+        {
+          "Name": "label",
+          "Value": "images/telefon7.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7.jpg",
+      "AssetFile": "images/telefon7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:25:46 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7_20250602032600.8f4nyh5xlq.jpg",
+      "AssetFile": "images/telefon7_20250602032600.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:26:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8f4nyh5xlq"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        },
+        {
+          "Name": "label",
+          "Value": "images/telefon7_20250602032600.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "images/telefon7_20250602032600.jpg",
+      "AssetFile": "images/telefon7_20250602032600.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7044"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 00:26:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3LOEVmYcFCn6/a6e1mvB882fJFKaH83HtyVSjSXnYaU="
+        }
+      ]
+    },
+    {
       "Route": "js/admin.376jhdyxcb.js",
       "AssetFile": "js/admin.js",
       "Selectors": [],

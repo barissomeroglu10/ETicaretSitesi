@@ -276,17 +276,29 @@ namespace ETicaretSitesi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SiparisDurumuGuncelle(int id, SiparisDurumu yeniDurum)
         {
-            var siparis = await _context.Siparisler.FindAsync(id);
-            if (siparis == null)
+            try
             {
-                return NotFound();
+                var siparis = await _context.Siparisler.FindAsync(id);
+                if (siparis == null)
+                {
+                    TempData["Hata"] = "Sipariş bulunamadı.";
+                    return NotFound();
+                }
+
+                var eskiDurum = siparis.SiparisDurumu;
+                siparis.SiparisDurumu = yeniDurum;
+                siparis.GuncellemeTarihi = DateTime.Now;
+
+                await _context.SaveChangesAsync();
+                
+                TempData["Mesaj"] = $"Sipariş durumu '{eskiDurum}' den '{yeniDurum}' durumuna başarıyla güncellendi.";
+                return RedirectToAction(nameof(SiparisDetay), new { id });
             }
-
-            siparis.SiparisDurumu = yeniDurum;
-            siparis.GuncellemeTarihi = DateTime.Now;
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(SiparisDetay), new { id });
+            catch (Exception ex)
+            {
+                TempData["Hata"] = "Sipariş durumu güncellenirken bir hata oluştu: " + ex.Message;
+                return RedirectToAction(nameof(SiparisDetay), new { id });
+            }
         }
 
         public async Task<IActionResult> Kullanicilar()
