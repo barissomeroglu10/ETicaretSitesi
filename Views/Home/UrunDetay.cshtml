@@ -42,9 +42,13 @@
                 </div>
                 
                 <div class="product-price-container mb-4">
+                    @{
+                        var originalPrice = Model.Fiyat * 1.2m;
+                        var discountPercentage = Math.Round(((originalPrice - Model.Fiyat) / originalPrice) * 100, 0);
+                    }
                     <span class="current-price">@Model.Fiyat.ToString("C")</span>
-                    <span class="original-price ms-2">@((Model.Fiyat * 1.2m).ToString("C"))</span>
-                    <span class="discount-badge ms-2">%17 İndirim</span>
+                    <span class="original-price ms-2">@originalPrice.ToString("C")</span>
+                    <span class="discount-badge ms-2">%@discountPercentage İndirim</span>
                 </div>
                 
                 <div class="product-stock-info mb-4">
