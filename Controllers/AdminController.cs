@@ -349,8 +349,34 @@ namespace ETicaretSitesi.Controllers
             {
                 try
                 {
-                    _context.Update(kullanici);
+                    // Mevcut kullanıcıyı veritabanından al
+                    var mevcutKullanici = await _context.Kullanicilar.FindAsync(id);
+                    if (mevcutKullanici == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Şifre değiştirilmek isteniyorsa hash'le, değilse mevcut şifreyi koru
+                    if (!string.IsNullOrEmpty(kullanici.Sifre))
+                    {
+                        mevcutKullanici.Sifre = SifreHelper.HashSifre(kullanici.Sifre);
+                    }
+
+                    // Diğer alanları güncelle
+                    mevcutKullanici.Ad = kullanici.Ad;
+                    mevcutKullanici.Soyad = kullanici.Soyad;
+                    mevcutKullanici.Email = kullanici.Email;
+                    mevcutKullanici.Telefon = kullanici.Telefon;
+                    mevcutKullanici.Adres = kullanici.Adres;
+                    mevcutKullanici.AdminMi = kullanici.AdminMi;
+                    mevcutKullanici.AktifMi = kullanici.AktifMi;
+                    mevcutKullanici.KullaniciAdi = kullanici.KullaniciAdi;
+                    
+                    // Rol alanını AdminMi durumuna göre otomatik set et
+                    mevcutKullanici.Rol = kullanici.AdminMi ? "Admin" : "Kullanici";
+
                     await _context.SaveChangesAsync();
+                    TempData["Mesaj"] = "Kullanıcı başarıyla güncellendi.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

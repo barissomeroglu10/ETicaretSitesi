@@ -89,10 +89,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Sifre" class="form-label"></label>
-                            <input asp-for="Sifre" class="form-control" type="password" />
+                            <label for="Sifre" class="form-label">Şifre (Opsiyonel)</label>
+                            <input name="Sifre" id="Sifre" class="form-control" type="password" placeholder="Yeni şifre girin (Değiştirmek için)" />
                             <span asp-validation-for="Sifre" class="text-danger"></span>
-                            <small class="form-text text-muted">Şifreyi değiştirmek istemiyorsanız boş bırakın.</small>
+                            <small class="form-text text-muted">
+                                <i class="fas fa-info-circle"></i> 
+                                Şifreyi değiştirmek istemiyorsanız bu alanı boş bırakın.
+                            </small>
                         </div>
 
                         <div class="text-end">

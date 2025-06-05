@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ETicaretSitesi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+729873fb765ae33fc3e77f934323ac5667da01ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bbb00d862d3234789a20961af35fa79d5cc23ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("ETicaretSitesi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ETicaretSitesi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

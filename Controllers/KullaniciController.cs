@@ -38,7 +38,7 @@ namespace ETicaretSitesi.Controllers
             }
 
             var kullanici = await _context.Kullanicilar
-                .FirstOrDefaultAsync(k => k.Email == email);
+                .FirstOrDefaultAsync(k => k.Email == email && k.AktifMi);
 
             if (kullanici != null && !SifreHelper.SifreDogrula(sifre, kullanici.Sifre))
             {
@@ -47,6 +47,16 @@ namespace ETicaretSitesi.Controllers
 
             if (kullanici != null)
             {
+                // Eğer kullanıcı admin değilse mevcut admin cookie'sini temizle
+                if (kullanici.Rol != "Admin")
+                {
+                    await HttpContext.SignOutAsync("AdminScheme");
+                }
+
+                // Son giriş tarihini güncelle
+                kullanici.SonGirisTarihi = DateTime.Now;
+                await _context.SaveChangesAsync();
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, kullanici.Ad),
@@ -133,15 +143,22 @@ namespace ETicaretSitesi.Controllers
             }
 
             var kullanici = await _context.Kullanicilar
-                .FirstOrDefaultAsync(k => k.Email == email);
+                .FirstOrDefaultAsync(k => k.Email == email && k.AktifMi);
 
             if (kullanici != null && !SifreHelper.SifreDogrula(sifre, kullanici.Sifre))
             {
                 kullanici = null;
             }
 
-            if (kullanici != null && kullanici.Rol == "Admin")
+            if (kullanici != null && kullanici.Rol == "Admin" && kullanici.AdminMi)
             {
+                // Mevcut user cookie'sini temizle
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Son giriş tarihini güncelle
+                kullanici.SonGirisTarihi = DateTime.Now;
+                await _context.SaveChangesAsync();
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, kullanici.Ad),
@@ -169,7 +186,9 @@ namespace ETicaretSitesi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminCikis()
         {
+            // Her iki cookie'yi de temizle
             await HttpContext.SignOutAsync("AdminScheme");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
@@ -177,7 +196,9 @@ namespace ETicaretSitesi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cikis()
         {
+            // Her iki cookie'yi de temizle
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync("AdminScheme");
             return RedirectToAction("Index", "Home");
         }
     }
