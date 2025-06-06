@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Admin Çıkışı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-sign-out-alt me-2"></i>Admin Çıkışı
+                    </h4>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-exclamation-triangle text-warning" style="font-size: 4rem;"></i>
+                    </div>
+                    <h5 class="mb-3">Admin panelinden çıkış yapmak istediğinizden emin misiniz?</h5>
+                    <p class="text-muted mb-4">
+                        Çıkış yaptıktan sonra admin paneline tekrar erişmek için 
+                        admin giriş bilgilerinizi kullanmanız gerekecek.
+                    </p>
+                    
+                    <div class="d-flex justify-content-center gap-3">
+                        <form asp-action="AdminCikis" method="post" class="d-inline">
+                            <input name="confirm" value="true" type="hidden" />
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-sign-out-alt me-2"></i>Evet, Çıkış Yap
+                            </button>
+                        </form>
+                        
+                        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-arrow-left me-2"></i>İptal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

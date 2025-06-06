@@ -182,14 +182,32 @@ namespace ETicaretSitesi.Controllers
             return View();
         }
 
+        // GET: AdminCikis - Çıkış onay sayfası
+        public IActionResult AdminCikis()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AdminCikis()
+        public async Task<IActionResult> AdminCikis(string confirm)
         {
-            // Her iki cookie'yi de temizle
-            await HttpContext.SignOutAsync("AdminScheme");
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                // Her iki cookie'yi de temizle
+                await HttpContext.SignOutAsync("AdminScheme");
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                
+                // Admin çıkışından sonra normal kullanıcı giriş sayfasına yönlendir
+                TempData["Mesaj"] = "Admin çıkışı başarıyla yapıldı. Tekrar giriş yapabilirsiniz.";
+                return Redirect("/Kullanici/Giris");
+            }
+            catch (Exception ex)
+            {
+                // Hata durumunda bile giriş sayfasına yönlendir
+                TempData["Hata"] = "Çıkış sırasında bir hata oluştu, ancak oturum kapatıldı.";
+                return Redirect("/Kullanici/Giris");
+            }
         }
 
         [HttpPost]

@@ -92,11 +92,9 @@
                                     <i class="fas fa-home me-2"></i>Ana Sayfa
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form asp-controller="Kullanici" asp-action="AdminCikis" method="post" class="d-inline">
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
-                                    </button>
-                                </form>
+                                <a href="@Url.Action("AdminCikis", "Kullanici")" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
+                                </a>
                             </div>
                         </li>
                     </ul>
@@ -116,6 +114,20 @@
                     {
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (TempData["Mesaj"] != null)
+                    {
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            @TempData["Mesaj"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (TempData["Hata"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["Hata"]
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     }
